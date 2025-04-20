@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { MdDeleteForever } from "react-icons/md";
 
-const PhoneCard = ({ phone }) => {
+
+const PhoneCard = ({ phone,deletable,handleDelete }) => {
     const {id, name, image, description } = phone || {};
 
     return (
@@ -29,6 +31,11 @@ const PhoneCard = ({ phone }) => {
                         </Link>
                     </div>
                 </div>
+                {
+                    deletable && <div className='text-center'>
+                        <button onClick={()=>handleDelete(id)}><MdDeleteForever size={40} /> </button>
+                    </div>
+                }
             </div>
         </div>
     );
