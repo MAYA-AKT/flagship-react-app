@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaCartShopping } from "react-icons/fa6";
 import { MdBookmarkAdd } from "react-icons/md";
 import { Link, NavLink } from 'react-router';
+import { CartContext } from '../Providers/Context';
 
 const Navbar = () => {
+
+    const { cart } = useContext(CartContext);
+
+
+
     const Links = <>
 
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/about'>About</NavLink></li>
         <li><NavLink to='/favorite' className='text-2xl'><MdBookmarkAdd /></NavLink></li>
-        <li><NavLink to='/' className='text-2xl'><FaCartShopping /></NavLink></li>
+        <li className='relative'>
+            <NavLink to='/' className='text-2xl'>
+                <FaCartShopping />
+                <p>{cart.length}</p>
+            </NavLink></li>
     </>
     return (
         <div className="navbar p-0 bg-base-100 shadow-sm  mx-auto px-8 md:px-12 lg:px-16 xl:px-24">
@@ -30,9 +40,9 @@ const Navbar = () => {
 
             <div className="navbar-end  hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                  {Links}
+                    {Links}
                 </ul>
-               
+
             </div>
         </div>
     );

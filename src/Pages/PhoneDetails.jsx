@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import Buttons from '../Components/ui/Buttons';
 import { FaCartShopping } from "react-icons/fa6";
 import { MdBookmarkAdd } from "react-icons/md";
-import { addFavorite } from '../utils';
+import { addFavorite, addToCart, getCart } from '../utils';
+import { CartContext } from '../Providers/Context';
 
 const PhoneDetails = () => {
+    const {setCart} = useContext(CartContext);
     const data = useLoaderData();
     const { id } = useParams();
 
@@ -21,10 +23,18 @@ const PhoneDetails = () => {
         camera_info
     } = singlePhone;
 
-   
-    const handleFavorite=()=>{
-       addFavorite(singlePhone);
+
+    const handleFavorite = () => {
+        addFavorite(singlePhone);
     }
+    const handleCart = () => {
+        addToCart(singlePhone);
+        setCart(getCart());
+    }
+
+
+    
+     
 
 
     return (
@@ -33,8 +43,8 @@ const PhoneDetails = () => {
             <div className="flex justify-between">
                 <h1 className='text-4xl font-thin mb-8'>{name}</h1>
                 <div className='space-x-4'>
-                    <Buttons label={<FaCartShopping/>} />
-                    <Buttons onClick={handleFavorite} label={<MdBookmarkAdd/>} />
+                    <Buttons onClick={handleCart} label={<FaCartShopping />} />
+                    <Buttons onClick={handleFavorite} label={<MdBookmarkAdd />} />
                 </div>
                 {/* Details */}
                 <div></div>

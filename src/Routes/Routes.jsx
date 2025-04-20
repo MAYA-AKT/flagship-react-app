@@ -29,6 +29,7 @@ export const router = createBrowserRouter([
         },
         {
           path:'/phone-details/:id',
+          hydrateFallbackElement:<p>Loading...</p>,
           loader:()=>fetch('../phones.json'), // (../) for fetching fake data from public folder  
           Component:PhoneDetails
         }
